@@ -48,6 +48,7 @@ def visualize_days():
 	# Close figure
 	#plt.clf()
 	plt.show()
+
 def visualize_type():
 	"""Visualize data by category in a bar graph"""
 	
@@ -63,7 +64,7 @@ def visualize_type():
 
 	# Set where the labels hit the x-axis
 	xlocations = np.array(range(len(labels))) + 1
-	#print xlocations
+	
 
 	width = 0.5
 
@@ -83,7 +84,9 @@ def visualize_type():
 	
 	# Close figure
 	#plt.clf()
+
 	plt.show()
+
 def main():
 	visualize_type()
 	visualize_days()
