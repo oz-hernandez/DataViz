@@ -46,8 +46,8 @@ def visualize_days():
 	plt.savefig("Days.png")
 
 	# Close figure
-	plt.clf()
-
+	#plt.clf()
+	plt.show()
 def visualize_type():
 	"""Visualize data by category in a bar graph"""
 	
@@ -56,14 +56,36 @@ def visualize_type():
    # incidents per Category.
 
 	counter = Counter(item["INCIDENT_TYPE_DESCRIPTION"] for item in data_file)
-	#print counter
+	
    # Set the labels which are based on the keys of our counter.
    # Since order doesn't matter, we can just use counter.keys()
 	labels = tuple(counter.keys())
-	#print labels
 
 	# Set where the labels hit the x-axis
-	xlocations = np.arange(len(labels)) + 0.5
+	xlocations = np.array(range(len(labels))) + 1
 	#print xlocations
+
+	width = 0.5
+
+	plt.figure(figsize=(16,9))
+	# Assign data to a bar plot
+	plt.bar(xlocations, counter.values(), width=width)
+
 	# Assign labels and tick location to x-axis
 	plt.xticks(xlocations + width / 2, labels, rotation=90)
+
+	# give some more room so the labels aren't cut off in the graph
+	plt.subplots_adjust(bottom= 0.4, right=0.98, left=0.05)
+
+	# Save the plot
+	
+	plt.savefig("Type.png")
+	
+	# Close figure
+	#plt.clf()
+	plt.show()
+def main():
+	visualize_type()
+	visualize_days()
+if __name__ == "__main__":
+	main()
