@@ -3,7 +3,7 @@ import parse as p
 
 def create_map(data_file):
 	# Define type of GeoJSON we're creating
-	geo_map = {"type: FeatureCollection"}
+	geo_map = {"type": "FeatureCollection"}
 
 	# Define empty list to collect each point to graph
 	item_list = []
