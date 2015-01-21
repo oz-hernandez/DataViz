@@ -14,7 +14,7 @@ def create_map(data_file):
 	for index, line in enumerate(data_file):
 
 		# Skip any zero coordinates as this will throw off
-		# out map.
+		# our map.
 		if line['X'] == "0" or line['Y'] == "0":
 			continue
 
@@ -22,11 +22,10 @@ def create_map(data_file):
 		data = {}
 
 		# Assign line items to appropriate GeoJSON fields.
-		data ['type'] = 'Feature'
-		data ['id'] = index
-		data['properties'] = {'title': line['Category'],
-							  'description': line['Descript'],
-							  'date': line['Date']}
+		data['type'] = 'Feature'
+		data['id'] = index
+		data['properties'] = {'description': line['INCIDENT_TYPE_DESCRIPTION'],
+							  'date': line['DAY_WEEK']}
 		data['geometry'] = {'type': 'Point',
 							'coordinates': (line['X'], line['Y'])}
 
@@ -34,7 +33,7 @@ def create_map(data_file):
 		item_list.append(data)
 
 		# For each point in our item_list, we add the point to our
-		# dictionary. setdefault creates a key called 'features' that
+		# dictionary. Setdefault creates a key called 'features' that
 		# has a value type of an empty list. With each iteration, we
 		# are appending our point to that list.
 		for point in item_list:
@@ -42,12 +41,12 @@ def create_map(data_file):
 
 		# Now that all data is parsed in GeoJSON, write to a file so we
 		# can upload it to gist.github.com
-		with open('file_sf.geojson', 'w') as f:
+		with open('file_Bos.geojson', 'w') as f:
 			f.write(geojson.dumps(geo_map))
 
 def main():
-	data_items = parse.MY_FILE
-	parsed_data = parse.parse(data_items, ",")
+	data_items = p.MY_FILE
+	parsed_data = p.parse(data_items, ",")
 	short_list = parsed_data[:20000]
 
 	return create_map(short_list)
